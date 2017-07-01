@@ -23,20 +23,26 @@
                 <div class="right floated user-name"> </div>
             </header>
             <section class="content">
-                <audio src="song.mp3"></audio>
+                <audio src="song1.mp3"></audio>
                 <div class="list-headers">
-        <div> Title </div>
-        <div> Artist </div>
-        <div> Album </div>
-        <div> Duration </div>
-        </div>
+                    <div> Title </div>
+                    <div> Artist </div>
+                    <div> Album </div>
+                    <div> Duration </div>
+                </div>
         <div class="song-list">
-        <div class="song">
-        <span class="song-name"></span>
-        <span class="song-artist"></span>
-        <span class="song-album"></span>
-        <span class="song-length"></span>
-        </div>
+            <div class="song" id="song1">
+                <span class="song-name"> </span>
+            </div>
+            <div class="song" id="song2">
+                <span class="song-name"> </span>
+            </div>
+            <div class="song" id="song3">
+                <span class="song-name"> </span>
+            </div>
+            <div class="song"  id="song4">
+                <span class="song-name"> </span>
+            </div>
         </div>
             </section>
             <footer>
@@ -45,9 +51,9 @@
                         <i class="fa fa-play clickable play-icon" aria-hidden="true"></i>
                     </div>
                     <div class="progress-wrapper">
-                        <span class="time-elapsed"> </span>
+                      <span class="time-elapsed"> </span>
                         <div class="player-progress">
-                            <div class="progress-filled"> </div>
+                            <div class="progress-filled" > </div>
                         </div>
                         <span class="song-duration"></span>
                     </div>
@@ -57,43 +63,8 @@
     </div>
     <script src="jquery.js">
     </script>
-    <script>
-    $('.welcome-screen button').on('click', function() {
-        var name = $('#name-input').val();
-        if (name.length > 2) {
-            var message = "Welcome, " + name;
-            $('.main .user-name').text(message);
-            $('.welcome-screen').addClass('hidden');
-            $('.main').removeClass('hidden');
-        } else {
-            $('#name-input').addClass('error');
-        }
-    });
-    function togglesong()
-    {
-      var song = document.querySelector('audio');
-      if (song.paused == true) {
-        console.log('Playing');
-        $('.play-icon').removeClass('fa-play').addClass('fa-pause');
-        song.play();
-      } else {
-        console.log('Pausing');
-        $('.play-icon').removeClass('fa-pause').addClass('fa-play');
-        song.pause();
-      }
-    }
-    $('.play-icon').on('click', function()
-    {
-        togglesong();
-    });
-    $('body').on('keypress', function(event)
-    {
-          if (event.keyCode == 32)
-          {
-              togglesong();      
-          }
-    });
+    <script src="main.js">
     </script>
-</body>
+ </body>
 
 </html>

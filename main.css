@@ -107,7 +107,11 @@ h1 {
     background-color: #959595;
     height: 8px;
     border-radius: 4px;
-    width: 0;
+    /*width: 0;*/
+    width: 2%;
+    text-align: center; /* To center it horizontally (if you want) */
+    line-height: 30px; /* To center it vertically */
+    color: white;
 
 }
 
@@ -159,3 +163,12 @@ h1 {
 .song-list .song:hover {
     background-color: #282828;
 }
+/*#progress-wrapper {
+    width: 100%;
+    background-color: grey;
+}
+#player-progress {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}*/
