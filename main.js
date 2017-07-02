@@ -82,75 +82,73 @@
             $('.time-elapsed').text(currentTime);
             $('.song-duration').text(duration);
       }
+      var songs =
+          [{
+              'name': 'Badri Ki Dulhania (Title Track)',
+              'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
+              'album': 'Badrinath ki Dulhania',
+              'duration': '2:56',
+             'fileName': 'song1.mp3'
+          },
+          {
+              'name': 'Humma Song',
+              'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
+              'album': 'Ok Jaanu',
+              'duration': '3:15',
+              'fileName': 'song2.mp3'
+          },
+          {
+              'name': 'Nashe Si Chadh Gayi',
+              'artist': 'Arijit Singh',
+              'album': 'Befikre',
+              'duration': '2:34',
+              'fileName': 'song3.mp3'
+          },
+          {
+              'name': 'The Breakup Song',
+              'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
+              'album': 'Ae Dil Hai Mushkil',
+              'duration': '2:29',
+              'fileName': 'song4.mp3'
+          }];
 
-      var songList = ['Tamma Tamma Again','Humma Song','Nashe Si Chadh Gayi','The Breakup Song'];
+      function addSongNameClickEvent(songName,position)     //songName and position are just two variables
+      {
+          var id = '#song' + position;              // if position is one id will be #song1
+          $(id).click(function()
+          {
+              var audio = document.querySelector('audio');
+              var currentSong = audio.src;
+              if(currentSong.search(songName) != -1)  //if what we got is not having the name songName is having , it will be -1 .
+              {
+                toggleSong();
+              }
+              else {
+                audio.src = songName;
+                toggleSong();
+             }
+          });
+      }
+      // for (var i = 0; i < fileNames.length ; i++) // we need not to write same type of lines loop is repeating them
+      // {
+      //     addSongNameClickEvent(fileNames[i],i)
+      // }
       window.onload = function()
       {
-        $('#song1 .song-name').text(songList[0]);
-        $('#song2 .song-name').text(songList[1]);
-        $('#song3 .song-name').text(songList[2]);
-        $('#song4 .song-name').text(songList[3]);
+        for(var i =0; i < songs.length;i++)
+        {
+          var obj = songs[i];
+          var name = '#song' + (i+1);
+          var song = $(name);
+          song.find('.song-name').text(obj.name);   //song.find() will make our code faster by not searching data in whole html file again and again
+          song.find('.song-artist').text(obj.artist);
+          song.find('.song-album').text(obj.album);
+          song.find('.song-length').text(obj.duration);
+          addSongNameClickEvent(obj.fileName,i)
+        }
         updateCurrentTime();
-          setInterval(function()      //sets interval so that the current time will be updated
-          {
-            updateCurrentTime();
-          },1000);
+        setInterval(function()      //sets interval so that the current time will be updated
+        {
+          updateCurrentTime();
+        },1000);
       }
-      var fileNames=['song1.mp3','song2.mp3','song3.mp3','song4.mp3'];
-      $('#song1').click(function()
-      {
-          var audio = document.querySelector('audio');
-          var currentSong = audio.src;
-          if(currentSong.search(fileNames[0]) != -1)
-          {
-            toggleSong();
-          }
-          else
-          {
-              audio.src = fileNames[0];
-              toggleSong();
-          }
-      });
-      $('#song2').click(function()
-      {
-        var audio=document.querySelector('audio');
-        var currentSong=audio.src;
-        if(currentSong.search(fileNames[1]) != -1)
-        {
-          toggleSong();
-        }
-        else
-        {
-          audio.src=fileNames[1];
-          toggleSong();
-        }
-      });
-      $('#song3').click(function()
-    {
-      var audio=document.querySelector('audio');
-      var currentSong=audio.src;
-      if (currentSong.search(fileNames[2]) != -1)
-      {
-          toggleSong();
-      }
-      else
-      {
-        console.log("else part");
-        audio.src=fileNames[2];
-        toggleSong();
-      }
-    });
-    $('#song4').click(function()
-    {
-        var audio=document.querySelector('audio');
-        var currentSong=audio.src;
-        if (currentSong.search(fileNames[3]) != -1)
-        {
-            toggleSong();
-        }
-        else
-        {
-          audio.src=fileNames[3];
-          toggleSong();
-        }
-      });
