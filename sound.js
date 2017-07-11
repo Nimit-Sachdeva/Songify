@@ -1,19 +1,11 @@
 var context;
-// var tuna;
 var delay;
 var overdrive;
 var wahwah;
 var tremolo;
 var phaser;
-function tunaDemo() {
-            // if (!window.webkitAudioContext) {
-            //     document.getElementById("body").innerHTML = "Oops, your browser doesn't support this demo! Please try the latest Google Chrome.";
-            //     return;
-            // } else {
-            //     if (!window.Audio) {
-            //         document.getElementById("body").innerHTML = "Oops, your browser doesn't support this demo! Please try the latest Google Chrome.";
-            //         return;
-            //     }
+function tunaDemo() {         //for tune audio effects functions
+
             /*These are the effects made with tuna*/
           var tuna = new Tuna(context);
 
@@ -63,21 +55,20 @@ function tunaDemo() {
                 var song1=document.querySelector('audio');
                 var source=context.createMediaElementSource(song1);
 
-                source.connect(wahwah.input);
+                source.connect(wahwah.input);       //for connecting  wahwah's source
                 source.connect(tremolo.input);
                 source.connect(delay.input);
                 source.connect(overdrive.input);
-                overdrive.connect(context.destination);
+                overdrive.connect(context.destination); //for taking it to destination
                 wahwah.connect(context.destination);
                 delay.connect(context.destination);
                 tremolo.connect(context.destination);
-
+//below are variables for buttons that are in html
 var del=document.querySelector('#delay');
 var ovr=document.querySelector('#overdrive');
 var wah=document.querySelector('#wahwah');
 var trem=document.querySelector('#tremolo');
 
-// var ovr=document.querySelector('#overdrive');
 del.addEventListener('click',function(e)
 {
       $(this).toggleClass('changecolor');
@@ -101,7 +92,7 @@ ovr.addEventListener('click',function(e)
       }
       else {
         overdrive.bypass=1;
-        console.log('true');
+          console.log('true');
       }
 });
 wah.addEventListener('click',function(e)
