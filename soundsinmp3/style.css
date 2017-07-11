@@ -1,0 +1,52 @@
+html {
+  font-size: 10px;
+  background: url("http://cdn.mos.musicradar.com/images/Tutorial%20images/Drums/drum-kit-hacks/drum-kit-hack-main-1200-80.jpg") bottom center;
+  background-size: cover;
+}
+body,html {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.keys {
+  display: flex;
+  flex: 1;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  border: .4rem solid black;
+  border-radius: .5rem;
+  margin: 1rem;
+  font-size: 1.5rem;
+  padding: 1rem .7rem;
+  transition: all .09s ease; // kitni der tk rkhna h effect n except of using set timeout we can use by css
+  width: 10rem;
+  text-align: center;
+  /*color: white;*/
+  color: #000000;
+  /*background: rgba(0,0,0,0.4);*/
+  background-color: #ffdab9;
+  text-shadow: 0 0 .5rem black;
+}
+
+.playing {
+  transform: scale(1.1); // kitni length tk upr aata h
+  border-color: #ffc600;
+  box-shadow: 0 0 1rem #ffc600;
+}
+
+kbd {
+  display: block;
+  font-size: 40px;
+}
+
+.sound {
+  font-size: 2.4rem;
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+  color: #000000;
+}

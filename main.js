@@ -1,32 +1,83 @@
+//for constants in javascript , const keyword is used
+var width = 1;
+var songNumber=1;
+var isPlaying=false;
+var currentSongNumber = 1;
+var willLoop = 0;
+var willShuffle = 0; // will use this soon
+
+var songs =
+[{
+  'name': 'Tamma Tamma Again',
+  'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
+  'album': 'Badrinath ki Dulhania',
+  'duration': '2:56',
+  'fileName': 'song1.mp3',
+  'image':'song1.jpg'
+},
+{
+  'name': 'Humma Song',
+  'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
+  'album': 'Ok Jaanu',
+  'duration': '3:15',
+  'fileName': 'song2.mp3',
+  'image':'song2.jpg'
+},
+{
+  'name': 'Nashe Si Chadh Gayi',
+  'artist': 'Arijit Singh',
+  'album': 'Befikre',
+  'duration': '2:34',
+  'fileName': 'song3.mp3',
+  'image':'song3.jpg'
+},
+{
+  'name': 'The Breakup Song',
+  'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
+  'album': 'Ae Dil Hai Mushkil',
+  'duration': '2:29',
+  'fileName': 'song4.mp3',
+  'image':'song4.jpg'
+}];
+        function move()           //for prograss bar moving
+        {
+          var elem = document.getElementsByClassName('progress-filled');
+          // var width = 1;
+          var id = setInterval(frame, 10);
+          function frame()
+          {
+            if (width >= 100)
+            {
+              clearInterval(id);
+            } else
+            {
+              width++;
+              elem.style.width = width + '%';
+            }
+          }
+        }
 
       $('.welcome-screen button').on('click', function() {
           var name = $('#name-input').val();
-          if (name.length > 2) {
+          if (name.length > 3) {
               var message = "Welcome, " + name;
               $('.main .user-name').text(message);
               $('.welcome-screen').addClass('hidden');
               $('.main').removeClass('hidden');
           } else {
+            var text = $('#name-input');
               $('#name-input').addClass('error');
+              //text.val('More than 3 Characters should be there' + text.val()  );
+              // alert('Sorry This is invalid');
           }
       });
-    function move()           //for prograss bar moving
-    {
-          var elem = document.getElementsByClassName('progress-filled');
-          var width = 1;
-          var id = setInterval(frame, 10);
-          function frame()
-          {
-              if (width >= 100)
-              {
-                  clearInterval(id);
-              } else
-              {
-                  width++;
-                  elem.style.width = width + '%';
-              }
-          }
+
+      function timeJump()
+      {
+        var song = document.querySelector('audio');
+         song.currentTime = song.duration - 5;
       }
+
       function toggleSong()         //it will toggle play and pause function
       {
           var song = document.querySelector('audio');
@@ -46,8 +97,8 @@
           toggleSong();
       });
       $('body').on('keypress', function(event)
-      {
-            if (event.keyCode == 32)    //code for spacebar key
+      {     var target=event.target;
+            if (event.keyCode == 32 && target.tagName != 'INPUT')    //code for spacebar key which will toggle Song is it is not on input
             {
                 toggleSong();
             }
@@ -81,74 +132,121 @@
             duration = fancyTimeFormat(duration)
             $('.time-elapsed').text(currentTime);
             $('.song-duration').text(duration);
-      }
-      var songs =
-          [{
-              'name': 'Badri Ki Dulhania (Title Track)',
-              'artist': 'Neha Kakkar, Monali Thakur, Ikka Singh, Dev Negi',
-              'album': 'Badrinath ki Dulhania',
-              'duration': '2:56',
-             'fileName': 'song1.mp3'
-          },
-          {
-              'name': 'Humma Song',
-              'artist': 'Badshah, Jubin Nautiyal, Shashaa Tirupati',
-              'album': 'Ok Jaanu',
-              'duration': '3:15',
-              'fileName': 'song2.mp3'
-          },
-          {
-              'name': 'Nashe Si Chadh Gayi',
-              'artist': 'Arijit Singh',
-              'album': 'Befikre',
-              'duration': '2:34',
-              'fileName': 'song3.mp3'
-          },
-          {
-              'name': 'The Breakup Song',
-              'artist': 'Nakash Aziz, Arijit Singh, Badshah, Jonita Gandhi',
-              'album': 'Ae Dil Hai Mushkil',
-              'duration': '2:29',
-              'fileName': 'song4.mp3'
-          }];
+          }
 
-      function addSongNameClickEvent(songName,position)     //songName and position are just two variables
+      function changeCurrentNameDetails(songObj)        // for getting song details like name and album name and album art
       {
+        $('.current-song-image').attr('src','img/'+songObj.image);
+        $('.current-song-name').text(songObj.name);
+        $('.current-song-album').text(songObj.album);
+      }
+      function addSongNameClickEvent(songObj,position)     //songName and position are just two variables
+      {
+          var songName=songObj.fileName;
           var id = '#song' + position;              // if position is one id will be #song1
           $(id).click(function()
           {
+
               var audio = document.querySelector('audio');
               var currentSong = audio.src;
-              if(currentSong.search(songName) != -1)  //if what we got is not having the name songName is having , it will be -1 .
+              //if(currentSong.search(songName) != -1)  //if what we got is not having the name songName is having , it will be -1 .
+              if(songNumber !== position)
               {
-                toggleSong();
-              }
-              else {
                 audio.src = songName;
-                toggleSong();
-             }
+                songNumber= position; // it will update value(position) of song as the songNumber changes
+                changeCurrentNameDetails(songObj);
+              }
+              toggleSong();
           });
       }
-      // for (var i = 0; i < fileNames.length ; i++) // we need not to write same type of lines loop is repeating them
-      // {
-      //     addSongNameClickEvent(fileNames[i],i)
-      // }
-      window.onload = function()
+
+
+
+
+      $('.fa-random').on('click',function() {
+          $('.fa-random').toggleClass('disabled')
+          willShuffle = 1 - willShuffle;    //it will shuffle the songs on clicking the shuffle button button
+      });
+      // $(document).ready(function() can also se used be as it performs the same function and can be used more than once
+      window.onload = function()    //works after html file loaded
       {
-        for(var i =0; i < songs.length;i++)
-        {
-          var obj = songs[i];
-          var name = '#song' + (i+1);
-          var song = $(name);
-          song.find('.song-name').text(obj.name);   //song.find() will make our code faster by not searching data in whole html file again and again
-          song.find('.song-artist').text(obj.artist);
-          song.find('.song-album').text(obj.album);
-          song.find('.song-length').text(obj.duration);
-          addSongNameClickEvent(obj.fileName,i)
-        }
-        updateCurrentTime();
-        setInterval(function()      //sets interval so that the current time will be updated
-        {
-          updateCurrentTime();
-        },1000);
+
+            changeCurrentNameDetails(songs[0]);   //first song will play first
+            updateCurrentTime();
+//            move();   //for moving progress bar
+            setInterval(function()      //sets interval so that the current time will be updated
+            {
+
+                updateCurrentTime();
+            },1000);
+            for(var i =0; i < songs.length;i++)
+            {
+                  var obj = songs[i];
+                  var name = '#song' + (i+1);
+                  var song = $(name);
+                  song.find('.song-name').text(obj.name);   //song.find() will make our code faster by not searching data in whole html file again and again
+                  song.find('.song-artist').text(obj.artist);
+                  song.find('.song-album').text(obj.album);
+                  song.find('.song-length').text(obj.duration);
+                  addSongNameClickEvent(obj,i+1);
+            }
+            //below function will add data table plugin and paging property is hidden by making it false.
+            $('#songs').DataTable({
+                paging: false
+            });
+            $('songs').DataTable();
+            $('audio').on('ended',function()
+                {
+                        var audio = document.querySelector('audio');
+                        if(currentSongNumber < songs.length) {
+                            var nextSongObj = songs[currentSongNumber];
+                            currentSongNumber = currentSongNumber + 1; // Change State
+                            audio.src = nextSongObj.fileName; // Change Soure
+                            toggleSong(); // Play Next Song
+                            changeCurrentNameDetails(nextSongObj); // Update Image
+                        }
+                        else
+                        {
+                          $('.play-icon').removeClass('fa-pause').addClass('fa-play');
+                                  audio.currentTime = 0;
+                                  console.log('else');
+                        }
+
+              });
+              // $('.fa-repeat').on('click',function() {
+              //         $('.fa-repeat').toggleClass('disabled')
+              //         var song= document.querySelector('audio');
+              //         willLoop = 1 - willLoop;    //it will repeat the song on clicking the loop button
+              //         if(currentSongNumber==songs.length && song.currentTime==song.duration)
+              //         {
+              //           audio.src=songs[0].fileName;
+              //               currentSongNumber==1;
+              //
+              //         }
+              //   });
+
+                $('.fa-step-backward').on('click',function()
+                {
+                      var audio= document.querySelector('audio');
+                      if(currentSongNumber > 1) {
+                          var prevSongObj = songs[currentSongNumber];
+                          currentSongNumber = currentSongNumber - 1; // Change State
+                          audio.src = prevSongObj.fileName; // Change Soure
+                          toggleSong(); // Play previous Song
+                          changeCurrentNameDetails(prevSongObj); // Update Image
+                      }
+                });
+
+            $('.fa-step-forward').on('click',function()
+            {
+                  var audio= document.querySelector('audio');
+                  if(currentSongNumber < songs.length) {
+                      var nextSongObj = songs[currentSongNumber];
+                      audio.src = nextSongObj.fileName; // Change Soure
+                      toggleSong(); // Play Next Song
+                      changeCurrentNameDetails(nextSongObj); // Update Image
+                      currentSongNumber = currentSongNumber + 1; // Change State
+                  }
+            });
+
       }

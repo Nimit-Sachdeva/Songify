@@ -1,3 +1,4 @@
+
 *,
 *:after,
 *:before {
@@ -40,6 +41,7 @@ h1 {
     flex-direction: column;
     color: white;
     background-color: #1f1f1f;
+
 }
 
 .main header {
@@ -77,6 +79,7 @@ h1 {
 
 .clickable {
     cursor: pointer;
+
 }
 
 .error {
@@ -107,11 +110,7 @@ h1 {
     background-color: #959595;
     height: 8px;
     border-radius: 4px;
-    /*width: 0;*/
-    width: 2%;
-    text-align: center; /* To center it horizontally (if you want) */
-    line-height: 30px; /* To center it vertically */
-    color: white;
+    width: 0%;
 
 }
 
@@ -155,20 +154,71 @@ h1 {
 .song > span:first-child {
     width: 330px;
 }
-
+.song .song-length
+{
+  text-align: right;
+}
 .song .song-duration {
     text-align: right;
+  }
+  /*
+  .song-list .song:hover {
+    background-color: #282828;
+  }*/
+
+.content {
+    position: relative;
+}
+.current-song-wrapper {
+    position: absolute;
+    bottom: 0 !important;
+    display: flex;
 }
 
-.song-list .song:hover {
-    background-color: #282828;
+.current-song-image {
+    height: 40px;
+    width: 40px;
+    margin-right: 1rem;
 }
-/*#progress-wrapper {
-    width: 100%;
-    background-color: grey;
+
+.current-song-name {
+    font-size: 1.4rem;
+    margin-top: 4px;
+    margin-bottom: 0;
 }
-#player-progress {
-    width: 1%;
-    height: 30px;
-    background-color: green;
-}*/
+
+.current-song-album {
+    margin-top: 0.4rem;
+}
+/*DataTables overrides*/
+table.dataTable tbody tr {
+    background-color: initial;
+}
+#songs_info {
+    display: none;
+}
+
+#songs_filter {
+    color: green;
+}
+#songs_filter input {
+    width: 400px;
+    margin-bottom: 0rem;
+    font-size: 16px;
+}
+
+.player-buttons .fa {
+  margin-right: 3rem;// rem= root element
+}
+.fa.disabled {
+  color: gray;
+}
+.buttons
+{
+  text-align: center;
+}
+.changecolor
+{
+  border:2px solid red;
+  color:red;
+}
