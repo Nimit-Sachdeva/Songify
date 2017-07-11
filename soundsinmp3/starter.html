@@ -7,8 +7,18 @@
 </head>
 <body>
 
-
+  <div class="buttons">
+    <h2>Each of these buttons plays the same sound.</h2>
+    <button id="delay">Delay</button>
+    <!-- <button id="">Phaser</button> -->
+    <button id="overdrive">Overdrive</button>
+    <button id="wahwah">Wah-Wah</button>
+    <!-- <button id="phaser">Phaser</button> -->
+    <button id="tremolo">Tremolo</button>
+  </div>
+<h1 style="color:white; text-align:center">Use Keyboard Buttons For Playing Drum</h1>
   <div class="keys">
+
     <div data-key="65" class="key">
       <kbd>A</kbd>
       <span class="sound">Beat</span>
@@ -75,7 +85,12 @@
   keys.forEach(key => key.addEventListener('transitionend', removeTransition)); // after end of transition remove the tramsition
   window.addEventListener('keydown', playSound);
 </script>
-
+<script src="jquery.js">
+</script>
+<script src="tuna-min.js">
+</script>
+<script src="sound.js">
+</script>
 
 </body>
 </html>
