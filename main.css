@@ -195,6 +195,7 @@ h1 {
 table.dataTable tbody tr {
     background-color: initial;
 }
+
 #songs_info {
     display: none;
 }
@@ -222,4 +223,11 @@ table.dataTable tbody tr {
 {
   border:2px solid red;
   color:red;
+}
+.wrong
+{
+  margin-top: 10px;
+  font-family: sans-serif;
+  justify-content: center;
+  align-items: center;
 }

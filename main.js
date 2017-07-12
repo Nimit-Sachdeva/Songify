@@ -5,7 +5,7 @@ var isPlaying=false;
 var currentSongNumber = 1;
 var willLoop = 0;
 var willShuffle = 0; // will use this soon
-
+//objects for songs details
 var songs =
 [{
   'name': 'Tamma Tamma Again',
@@ -39,27 +39,26 @@ var songs =
   'fileName': 'song4.mp3',
   'image':'song4.jpg'
 }];
-        function move()           //for prograss bar moving
+        function progressMove()           //for prograss bar moving
         {
           var elem = document.getElementsByClassName('progress-filled');
           // var width = 1;
           var id = setInterval(frame, 10);
           function frame()
           {
-            if (width >= 100)
-            {
-              clearInterval(id);
-            } else
-            {
-              width++;
-              elem.style.width = width + '%';
-            }
+                if (width >= 100)
+                {
+                  clearInterval(id);
+                } else
+                {
+                  width++;
+                  elem.style.width = width + '%';
+                }
           }
         }
-
       $('.welcome-screen button').on('click', function() {
           var name = $('#name-input').val();
-          if (name.length > 3) {
+          if (name.length > 3) {          //min Characters should be 3 otherwise error
               var message = "Welcome, " + name;
               $('.main .user-name').text(message);
               $('.welcome-screen').addClass('hidden');
@@ -67,12 +66,12 @@ var songs =
           } else {
             var text = $('#name-input');
               $('#name-input').addClass('error');
-              //text.val('More than 3 Characters should be there' + text.val()  );
-              // alert('Sorry This is invalid');
+              var wrong="Error: Minimum Characters should be more than 3";
+              $('.welcome-screen .wrong').text(wrong);
+
           }
       });
-
-      function timeJump()
+      function timeJump()       //jumps the song for less than 5 seconds than duration
       {
         var song = document.querySelector('audio');
          song.currentTime = song.duration - 5;
@@ -140,6 +139,7 @@ var songs =
         $('.current-song-name').text(songObj.name);
         $('.current-song-album').text(songObj.album);
       }
+
       function addSongNameClickEvent(songObj,position)     //songName and position are just two variables
       {
           var songName=songObj.fileName;
@@ -213,6 +213,7 @@ var songs =
                         }
 
               });
+              //below commented code is not working so I made it as comment for some time
               // $('.fa-repeat').on('click',function() {
               //         $('.fa-repeat').toggleClass('disabled')
               //         var song= document.querySelector('audio');
